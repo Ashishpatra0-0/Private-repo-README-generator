@@ -27,7 +27,7 @@ function FETCHrepoDATA(user, repo) {
                 } else if (error.response.status === 403) {
                     reject(new Error(" Forbidden: Token does not have required permissions (maybe missing 'repo' scope)."));
                 } else if (error.response.status === 404) {
-                    reject(new Error(" Repository not found. Check owner/repo name or token access."));
+                    reject(new Error(" Repository not found. Check user/repo name or token access."));
                 } else {
                     reject(new Error(`GitHub API Error: ${error.response.status} ${error.response.statusText}`));
                 }
@@ -40,20 +40,19 @@ function FETCHrepoDATA(user, repo) {
 
 function generateREADME(data) {
     return `
- #${data.name}
+ # ${data.name}
  
- ##${data.description}
+ ## ${data.description}
  
- ##Installation
- '''bash
- git clone ${data.clone_url}
- cd repo
+ ## Installation
+ git clone ${data.clone_url} ;
+ cd repo ;
  npm install
- '''
- ##Tech Stack
+
+ ## Tech Stack
  Main Language :${data.language}
  
- ##License Information
+ ## License Information
  ${data.license ? data.license.name : "No license"}`
 
 }
